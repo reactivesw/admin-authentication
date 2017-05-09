@@ -1,0 +1,11 @@
+apply plugin: 'checkstyle'
+
+checkstyle{
+    toolVersion='6.15'
+
+    ignoreFailures = false
+
+    sourceSets = [sourceSets.main]
+
+    configFile = './build_scripts/quality_assurance/config/checkstyle/checkstyle.xml' as File
+}

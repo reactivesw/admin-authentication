@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: customer-authentication
+  cloud:
+    config:
+      uri: http://localhost:8888
+#      uri: http://config-service
+#      uri: http://146.148.106.78:8888
