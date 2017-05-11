@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * Scope controller.
  */
@@ -59,5 +61,18 @@ public class ScopeController {
 
     LOG.info("Exit. scopeView: {}.", view);
     return view;
+  }
+
+  /**
+   * Get all scopes
+   * @return list of scope view
+   */
+  public List<ScopeView> getAll(){
+    LOG.info("Enter.");
+
+    List<ScopeView> views = scopeApplication.getAll();
+
+    LOG.info("Exit. scopeView size: {}.", views.size());
+    return views;
   }
 }

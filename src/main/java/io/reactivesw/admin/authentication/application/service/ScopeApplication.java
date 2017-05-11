@@ -47,7 +47,7 @@ public class ScopeApplication {
   public ScopeView create(ScopeDraft draft) {
     LOG.debug("Enter. draft: {}.", draft);
 
-    Scope scope = ScopeMapper.toModel(draft);
+    Scope scope = ScopeMapper.toEntity(draft);
 
     List<Permission> permissions = PermissionMapper.toModel(draft.getPermissions());
     scope.setPermissions(permissions);
@@ -57,7 +57,7 @@ public class ScopeApplication {
 
     Scope savedScope = scopeService.save(scope);
 
-    ScopeView scopeView = ScopeMapper.toView(savedScope);
+    ScopeView scopeView = ScopeMapper.toModel(savedScope);
 
     LOG.debug("Exit. scopeView: {}.", scopeView);
     return scopeView;
@@ -73,10 +73,25 @@ public class ScopeApplication {
     LOG.debug("Enter. id: {}.", id);
 
     Scope scope = scopeService.getById(id);
-    ScopeView view = ScopeMapper.toView(scope);
+    ScopeView view = ScopeMapper.toModel(scope);
 
     LOG.debug("Enter. scopeView: {}.", view);
     return view;
+  }
+
+  /**
+   * Get all scopes.
+   * @return List of scope view
+   */
+  public List<ScopeView> getAll(){
+    LOG.debug("Enter.");
+
+    List<Scope> scopes = scopeService.getAll();
+    List<ScopeView> views = ScopeMapper.toModel(scopes);
+
+    LOG.debug("Enter. scopeView size: {}.", views.size());
+    LOG.trace("ScopeViewList: {}.", views);
+    return views;
   }
 }
 

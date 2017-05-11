@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Scope service, used to manage scopes.
  */
@@ -58,5 +60,20 @@ public class ScopeService {
     LOG.debug("Exit. scope: {}.", scope);
 
     return scope;
+  }
+
+  /**
+   * Get all scopes from database.
+   * @return List of scope
+   */
+  public List<Scope> getAll(){
+    LOG.debug("Enter.");
+
+    List<Scope> scopes = scopeRepository.findAll();
+
+    LOG.debug("Exit. scopes size: {}.", scopes.size());
+    LOG.trace("Scopes: {}.", scopes);
+
+    return scopes;
   }
 }

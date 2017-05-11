@@ -4,6 +4,9 @@ import io.reactivesw.admin.authentication.application.model.ScopeDraft;
 import io.reactivesw.admin.authentication.application.model.ScopeView;
 import io.reactivesw.admin.authentication.domain.model.Scope;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Scope mapper.
  */
@@ -21,7 +24,7 @@ public final class ScopeMapper {
    *
    * @param draft ScopeDraft
    */
-  public static Scope toModel(ScopeDraft draft) {
+  public static Scope toEntity(ScopeDraft draft) {
     Scope scope = new Scope();
     scope.setScopeName(draft.getScopeName());
     return scope;
@@ -33,7 +36,7 @@ public final class ScopeMapper {
    * @param scope Scope
    * @return ScopeView
    */
-  public static ScopeView toView(Scope scope) {
+  public static ScopeView toModel(Scope scope) {
     ScopeView view = new ScopeView();
     view.setId(scope.getId());
     view.setCreatedAt(scope.getCreatedAt());
@@ -44,5 +47,19 @@ public final class ScopeMapper {
     view.setPermissions(scope.getPermissions());
 
     return view;
+  }
+
+  /**
+   * Convert list of scope to list of scope view.
+   *
+   * @param scopes scope list
+   * @return scope view list
+   */
+  public static List<ScopeView> toModel(List<Scope> scopes) {
+    List<ScopeView> scopeViews = new ArrayList<>();
+    scopes.stream().forEach(
+        scope -> scopeViews.add(toModel(scope))
+    );
+    return scopeViews;
   }
 }
