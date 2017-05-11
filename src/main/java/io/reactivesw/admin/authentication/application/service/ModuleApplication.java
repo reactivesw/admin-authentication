@@ -11,12 +11,14 @@ import io.reactivesw.exception.ConflictException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Module application.
  */
+@Service
 public class ModuleApplication {
   /**
    * LOG.

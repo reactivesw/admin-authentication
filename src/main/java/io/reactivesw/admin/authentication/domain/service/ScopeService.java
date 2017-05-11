@@ -30,7 +30,7 @@ public class ScopeService {
    * @param scope Scope
    * @return Scope
    */
-  public Scope create(Scope scope) {
+  public Scope save(Scope scope) {
     LOG.debug("Enter. scope: {}.", scope);
 
     Scope savedScope = this.scopeRepository.save(scope);

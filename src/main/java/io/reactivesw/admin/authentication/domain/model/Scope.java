@@ -65,7 +65,7 @@ public class Scope {
   /**
    * Scope name.
    */
-  @Column
+  @Column(unique = true)
   private String scopeName;
 
   /**
