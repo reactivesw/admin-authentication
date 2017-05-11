@@ -89,9 +89,9 @@ public final class JsonUtils {
 
     try {
       return OBJECT_MAPPER.writeValueAsString(obj);
-    } catch (JsonProcessingException e) {
-      LOG.debug("Error serializing object", e);
-      throw new IllegalArgumentException("Error serializing object: " + e.getMessage());
+    } catch (JsonProcessingException ex) {
+      LOG.debug("Error serializing object", ex);
+      throw new IllegalArgumentException("Error serializing object: " + ex.getMessage());
     }
   }
 
@@ -101,12 +101,12 @@ public final class JsonUtils {
    * @param string String
    * @return boolean
    */
-  public static boolean isJSONValid(String string) {
+  public static boolean isJsonValid(String string) {
     boolean result = false;
     try {
       OBJECT_MAPPER.readTree(string);
       result = true;
-    } catch (IOException e) {
+    } catch (IOException ex) {
       result = false;
     }
     return result;
@@ -120,15 +120,15 @@ public final class JsonUtils {
    * @param <T>   Type
    * @return boolean
    */
-  public static <T> boolean isJSONValid(String value, Class<T> clazz) {
+  public static <T> boolean isJsonValid(String value, Class<T> clazz) {
     boolean result = false;
     if (!StringUtils.isBlank(value)) {
       try {
         OBJECT_MAPPER.readValue(value, clazz);
         result = true;
-      } catch (IOException e) {
+      } catch (IOException ex) {
         // do nothing
-        LOG.debug("string is not valid json. string: {}", value);
+        LOG.debug("String is not valid json. string: {}", value);
       }
     }
     return result;

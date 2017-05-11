@@ -10,17 +10,18 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
- * roles in the system.
+ * Roles in the system.
  */
 @Entity
 @Table(name = "role")
@@ -30,7 +31,7 @@ import javax.persistence.Version;
 public class Role {
 
   /**
-   * uuid.
+   * Uuid.
    */
   @Id
   @GeneratedValue(generator = "uuid")
@@ -68,6 +69,6 @@ public class Role {
   /**
    * List of scopes.
    */
-  @ElementCollection
-  private List<String> scopes;
+  @OneToMany(cascade = CascadeType.ALL)
+  private List<Scope> scopes;
 }
