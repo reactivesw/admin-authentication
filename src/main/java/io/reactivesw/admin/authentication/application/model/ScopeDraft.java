@@ -4,6 +4,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Scope draft used to save a new scope.
  */
@@ -13,6 +15,7 @@ public class ScopeDraft {
   /**
    * Scope name.
    */
+  @NotNull
   private String scopeName;
 
   /**

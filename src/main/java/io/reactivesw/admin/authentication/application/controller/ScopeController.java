@@ -4,15 +4,19 @@ import io.reactivesw.admin.authentication.application.model.ScopeDraft;
 import io.reactivesw.admin.authentication.application.model.ScopeView;
 import io.reactivesw.admin.authentication.application.service.ScopeApplication;
 import io.reactivesw.admin.authentication.infrastructure.Router;
+import io.reactivesw.admin.authentication.infrastructure.update.UpdateRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 /**
  * Scope controller.
@@ -38,7 +42,7 @@ public class ScopeController {
    * @return ScopeView
    */
   @PostMapping(Router.SCOPE_ROOT)
-  public ScopeView create(ScopeDraft draft) {
+  public ScopeView create(@RequestBody @Valid ScopeDraft draft) {
     LOG.info("Enter. scopeDraft: {}.", draft);
 
     ScopeView view = scopeApplication.create(draft);
@@ -65,14 +69,35 @@ public class ScopeController {
 
   /**
    * Get all scopes
+   *
    * @return list of scope view
    */
-  public List<ScopeView> getAll(){
+  @GetMapping(Router.SCOPE_ROOT)
+  public List<ScopeView> getAll() {
     LOG.info("Enter.");
 
     List<ScopeView> views = scopeApplication.getAll();
 
     LOG.info("Exit. scopeView size: {}.", views.size());
     return views;
+  }
+
+
+  /**
+   * Update one scope
+   *
+   * @param id            String
+   * @param updateRequest UpdateRequest
+   * @return
+   */
+  public ScopeView update(@PathVariable String id,
+                          @RequestBody @Valid UpdateRequest updateRequest) {
+    LOG.info("Enter. id: {}. updateRequest: {}.", id, updateRequest);
+
+    ScopeView view = scopeApplication.update(id, updateRequest.getVersion(), updateRequest
+        .getActions());
+
+    LOG.info("Exit. scopeView: {}.", view);
+    return view;
   }
 }

@@ -9,6 +9,9 @@ import io.reactivesw.admin.authentication.domain.model.Scope;
 import io.reactivesw.admin.authentication.domain.service.ModuleService;
 import io.reactivesw.admin.authentication.domain.service.ScopeService;
 import io.reactivesw.admin.authentication.infrastructure.enums.Permission;
+import io.reactivesw.admin.authentication.infrastructure.update.ScopeUpdaterService;
+import io.reactivesw.admin.authentication.infrastructure.update.UpdateAction;
+import io.reactivesw.exception.ConflictException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +40,12 @@ public class ScopeApplication {
    */
   @Autowired
   private transient ScopeService scopeService;
+
+  /**
+   * Scope updater service.
+   */
+  @Autowired
+  private transient ScopeUpdaterService scopeUpdaterService;
 
   /**
    * Create scope from draft.
@@ -81,9 +90,10 @@ public class ScopeApplication {
 
   /**
    * Get all scopes.
+   *
    * @return List of scope view
    */
-  public List<ScopeView> getAll(){
+  public List<ScopeView> getAll() {
     LOG.debug("Enter.");
 
     List<Scope> scopes = scopeService.getAll();
@@ -92,6 +102,45 @@ public class ScopeApplication {
     LOG.debug("Enter. scopeView size: {}.", views.size());
     LOG.trace("ScopeViewList: {}.", views);
     return views;
+  }
+
+  /**
+   * Update a scope
+   *
+   * @param id      String
+   * @param version integer
+   * @param actions action list
+   * @return Scope view
+   */
+  public ScopeView update(String id, Integer version, List<UpdateAction> actions) {
+    LOG.debug("Enter. id: {}, version: {}, actions: {}.", id, version, actions);
+
+    Scope valueInDb = scopeService.getById(id);
+    LOG.trace("Data in db: {}", valueInDb);
+    checkVersion(version, valueInDb.getVersion());
+
+    actions.stream().forEach(
+        action -> scopeUpdaterService.handle(valueInDb, action)
+    );
+
+    Scope savedValue = scopeService.save(valueInDb);
+    ScopeView view = ScopeMapper.toModel(savedValue);
+
+    LOG.debug("Exit. updatedView: {}.", view);
+    return view;
+  }
+
+  /**
+   * Check the version.
+   *
+   * @param inputVersion Integer
+   * @param existVersion Integer
+   */
+  private void checkVersion(Integer inputVersion, Integer existVersion) {
+    if (!inputVersion.equals(existVersion)) {
+      LOG.debug("Scope version is not correct.");
+      throw new ConflictException("Scope version is not correct.");
+    }
   }
 }
 
