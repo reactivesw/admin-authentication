@@ -77,7 +77,7 @@ public class Admin {
   /**
    * List of roles.
    */
-  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<Role> roles;
 
   /**

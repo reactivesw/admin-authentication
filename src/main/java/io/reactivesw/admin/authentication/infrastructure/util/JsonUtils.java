@@ -101,7 +101,7 @@ public final class JsonUtils {
    * @param string String
    * @return boolean
    */
-  public static boolean isJSONValid(String string) {
+  public static boolean isJsonValid(String string) {
     boolean result = false;
     try {
       OBJECT_MAPPER.readTree(string);
@@ -120,7 +120,7 @@ public final class JsonUtils {
    * @param <T>   Type
    * @return boolean
    */
-  public static <T> boolean isJSONValid(String value, Class<T> clazz) {
+  public static <T> boolean isJsonValid(String value, Class<T> clazz) {
     boolean result = false;
     if (!StringUtils.isBlank(value)) {
       try {
@@ -128,7 +128,7 @@ public final class JsonUtils {
         result = true;
       } catch (IOException ex) {
         // do nothing
-        LOG.debug("string is not valid json. string: {}", value);
+        LOG.debug("String is not valid json. string: {}", value);
       }
     }
     return result;

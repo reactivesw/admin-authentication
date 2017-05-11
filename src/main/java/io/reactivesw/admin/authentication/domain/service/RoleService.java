@@ -27,8 +27,8 @@ public class RoleService {
   /**
    * Create module with sample.
    *
-   * @param role Module
-   * @return Module
+   * @param role Role
+   * @return Role
    */
   public Role create(Role role) {
     LOG.debug("Enter. role: {}.", role);

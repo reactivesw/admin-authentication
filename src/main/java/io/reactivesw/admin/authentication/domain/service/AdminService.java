@@ -40,4 +40,36 @@ public class AdminService {
     return savedAdmin;
   }
 
+  /**
+   * Get admin by id.
+   *
+   * @param id String
+   * @return Admin
+   */
+  public Admin getById(String id) {
+    LOG.debug("Enter. id: {}.", id);
+
+    Admin admin = this.adminRepository.findOne(id);
+
+    LOG.debug("Exit. admin: {}.", admin);
+
+    return admin;
+  }
+
+  /**
+   * Find one by email.
+   *
+   * @param email String
+   * @return Admin
+   */
+  public Admin getByEmail(String email) {
+    LOG.debug("Enter. email: {}.", email);
+
+    Admin admin = this.adminRepository.findOneByEmail(email);
+
+    LOG.debug("Exit. admin: {}.", admin);
+
+    return admin;
+  }
+
 }

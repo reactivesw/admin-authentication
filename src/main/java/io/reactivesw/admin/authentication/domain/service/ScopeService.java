@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Role service, used to manage scopes.
+ * Scope service, used to manage scopes.
  */
 @Service
 public class ScopeService {
@@ -19,7 +19,7 @@ public class ScopeService {
   private static final Logger LOG = LoggerFactory.getLogger(ScopeService.class);
 
   /**
-   * Role repository.
+   * Scope repository.
    */
   @Autowired
   private transient ScopeRepository scopeRepository;
@@ -27,8 +27,8 @@ public class ScopeService {
   /**
    * Create module with sample.
    *
-   * @param scope Module
-   * @return Module
+   * @param scope Scope
+   * @return Scope
    */
   public Scope create(Scope scope) {
     LOG.debug("Enter. scope: {}.", scope);
