@@ -108,8 +108,26 @@ Create new module.
 - Return created view
 
 ## 3.3 Get Module by id
-Get Module by id
+Get module by id.
+### 3.3.1 Workflow
+- Receive id from request
+- Get module from database, and if module not exist, then throw exception
+- Convert module to module view, and return it
 
+## 3.4 Get all modules
+Get all modules from database.
+### 3.4.1 Workflow
+- Fetch all modules from database
+- Convert module list to module view list
+- Return it
+
+## 3.5 Update module
+- Receive id, update request form request
+- Get module from database, and if module not exist, then throw exception
+- Check version, if version not correct, then throw exception
+- Run each update service
+- Save the updated module to database
+- Convert the saved module to view and return it
 
 ## 3.2 Login
 Use email and password to login to the admin system, and the server will keep the session.
