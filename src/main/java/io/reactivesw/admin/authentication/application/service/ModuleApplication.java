@@ -44,7 +44,7 @@ public class ModuleApplication {
   public ModuleView create(ModuleDraft draft) {
     LOG.debug("Enter. moduleDraft: {}.", draft);
 
-    Module module = ModuleMapper.toModel(draft);
+    Module module = ModuleMapper.toEntity(draft);
     Module savedModule = moduleService.save(module);
     ModuleView result = ModuleMapper.toView(savedModule);
 

@@ -24,7 +24,7 @@ public final class ModuleMapper {
    *
    * @return Module
    */
-  public static Module toModel(ModuleDraft draft) {
+  public static Module toEntity(ModuleDraft draft) {
     Module module = new Module();
     module.setModuleName(draft.getModuleName());
     module.setPath(draft.getPath());
