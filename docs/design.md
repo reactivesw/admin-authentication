@@ -7,11 +7,11 @@ This doc describes the design of admin authentication service.
 - A scope contains a list of models, and a list of actions, meas that, the employee has those permissions on those models.
 - A role contains a list of scopes.
 - Each user of this service has a list of roles, so that the user can has those permissions contained in these roles.
+- Admin, Role, Scope, Module are four independent resource, all of them should and must be created independently.
 
 
 ## 1. Basic futures
-- Add admin
-- Add employee
+- Add admin, scope, role, module
 - Login, Logout
 - Check login status and permission
 - Change password
@@ -86,28 +86,30 @@ This doc describes the design of admin authentication service.
 # 3. Detail design
 
 ## 3.1 Add admin
-Just use super admin to post the data to the service, and then the admin will be created. When an admin be created, the `ADMIN` role will assigned to the user automatic.
+Add an admin of the shop to the system.
+**Key Points**
+- Make sure the roles contained exists in the system.
+- Password must 
+### Workflow
+- Receive email, password and role list from request
+- Check if the password is correct and the roles exist in the system
+- Save the new admin to database
+- Return the saved admin
 
-## 3.2 Add employee
-Just use admin to post the data to the service, and then the employee will be created. The roles can be post to the server together, or admin can assign roles to employee later.
-
-## 3.3 Login
+## 3.2 Login
 Use email and password to login to the admin system, and the server will keep the session.
 
-## 3.4 Logout
+## 3.3 Logout
 When logout from the system, the session will be clear immediately.
 
-## 3.5 Check login status and permission
+## 3.4 Check login status and permission
 Check if the user has login, and if he/she has the right permissions.
 
-## 3.6 Change password
+## 3.5 Change password
 User can change his/her password with his/her old password.
 
-## 3.7 Reset employee's password
+## 3.6 Reset employee's password
 Admin can reset employees's password.
 
-## 3.8 Change employee's permission
+## 3.7 Change employee's permission
 Admin can change employee's permission, and the permissions in session will be changed at the same time.
-
-# 4. Workflow
-![image](./resource/auth-work-flow.png)

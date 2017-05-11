@@ -116,7 +116,7 @@ public class Admin {
   }
 
   /**
-   * Get save at.
+   * Get create at.
    *
    * @return ZonedDateTime
    */
@@ -125,7 +125,7 @@ public class Admin {
   }
 
   /**
-   * Set save at.
+   * Set create at.
    *
    * @param createdAt ZonedDateTime
    */
