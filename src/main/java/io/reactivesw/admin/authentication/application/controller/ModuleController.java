@@ -93,7 +93,10 @@ public class ModuleController {
                                  @RequestBody @Valid UpdateRequest updateRequest) {
     LOG.info("Enter. id: {}. updateRequest: {}.", id, updateRequest);
 
-    LOG.info("Exit. id: {}.", id);
-    return null;
+    ModuleView view = moduleApplication.update(id, updateRequest.getVersion(), updateRequest
+        .getActions());
+
+    LOG.info("Exit. view: {}.", view);
+    return view;
   }
 }
