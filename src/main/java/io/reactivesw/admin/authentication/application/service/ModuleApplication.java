@@ -46,7 +46,7 @@ public class ModuleApplication {
 
     Module module = ModuleMapper.toEntity(draft);
     Module savedModule = moduleService.save(module);
-    ModuleView result = ModuleMapper.toView(savedModule);
+    ModuleView result = ModuleMapper.toModel(savedModule);
 
     LOG.debug("Exit. moduleView: {}.", result);
     return result;
@@ -62,7 +62,7 @@ public class ModuleApplication {
     LOG.debug("Enter. id: {}.", id);
 
     Module module = moduleService.getById(id);
-    ModuleView view = ModuleMapper.toView(module);
+    ModuleView view = ModuleMapper.toModel(module);
 
     LOG.debug("Exit. view: {}.", view);
     return view;
@@ -79,7 +79,7 @@ public class ModuleApplication {
     List<Module> moduleList = moduleService.getAll();
     LOG.trace("model list: module: {}.", moduleList);
 
-    List<ModuleView> viewList = ModuleMapper.toView(moduleList);
+    List<ModuleView> viewList = ModuleMapper.toModel(moduleList);
 
     LOG.debug("Exit. moduleView size: {}.", viewList.size());
     LOG.trace("View list: moduleView: {}.", viewList);
@@ -106,7 +106,7 @@ public class ModuleApplication {
     );
 
     Module savedValue = moduleService.save(valueInDb);
-    ModuleView view = ModuleMapper.toView(savedValue);
+    ModuleView view = ModuleMapper.toModel(savedValue);
 
     LOG.debug("Exit. updatedView: {}.", view);
     return view;

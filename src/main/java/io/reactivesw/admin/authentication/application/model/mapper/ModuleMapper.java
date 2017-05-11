@@ -37,7 +37,7 @@ public final class ModuleMapper {
    * @param module Module
    * @return ModuleView
    */
-  public static ModuleView toView(Module module) {
+  public static ModuleView toModel(Module module) {
     ModuleView view = new ModuleView();
     view.setId(module.getId());
     view.setCreatedAt(module.getCreatedAt());
@@ -54,10 +54,10 @@ public final class ModuleMapper {
    * @param moduleList Module list
    * @return ModuleView list
    */
-  public static List<ModuleView> toView(List<Module> moduleList) {
+  public static List<ModuleView> toModel(List<Module> moduleList) {
     List<ModuleView> viewList = new ArrayList<>();
     moduleList.stream().forEach(
-        module -> viewList.add(toView(module))
+        module -> viewList.add(toModel(module))
     );
     return viewList;
   }
