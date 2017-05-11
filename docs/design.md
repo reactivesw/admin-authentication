@@ -89,12 +89,27 @@ This doc describes the design of admin authentication service.
 Add an admin of the shop to the system.
 **Key Points**
 - Make sure the roles contained exists in the system.
-- Password must 
-### Workflow
+
+### 3.1.1 Workflow
 - Receive email, password and role list from request
 - Check if the password is correct and the roles exist in the system
 - Save the new admin to database
 - Return the saved admin
+
+## 3.2 Create module
+Create new module.
+**Key Points**
+- Make sure path in each module is unique.
+### 3.2.1 Workflow
+- Receive draft from request
+- Convert draft to module
+- Save to database
+- Convert saved module to view
+- Return created view
+
+## 3.3 Get Module by id
+Get Module by id
+
 
 ## 3.2 Login
 Use email and password to login to the admin system, and the server will keep the session.

@@ -22,7 +22,7 @@ public class Router {
   /**
    * Module root.
    */
-  public static final String MODULE_ROOT = AUTHENTICATION_ROOT + "module/";
+  public static final String MODULE_ROOT = AUTHENTICATION_ROOT + "modules/";
 
   /**
    * Module with id.
