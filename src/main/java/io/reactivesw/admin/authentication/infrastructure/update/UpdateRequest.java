@@ -35,7 +35,7 @@ public class UpdateRequest {
    * @return list of UpdateAction
    */
   public List<UpdateAction> getActions() {
-    return actions.parallelStream().map(action -> (UpdateAction) action).collect(Collectors
+    return actions.stream().map(action -> (UpdateAction) action).collect(Collectors
         .toList());
   }
 

@@ -60,12 +60,12 @@ public class Module {
   /**
    * Module name.
    */
-  @Column
+  @Column(unique = true)
   private String moduleName;
 
   /**
-   * Path of this module.
+   * Path of this module. the path of this mudule must be unique.
    */
-  @Column
+  @Column(unique = true)
   private String path;
 }
