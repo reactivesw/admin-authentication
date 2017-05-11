@@ -1,5 +1,6 @@
 package io.reactivesw.admin.authentication.domain.model;
 
+import io.reactivesw.admin.authentication.infrastructure.enums.Permission;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,12 +11,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -30,7 +34,7 @@ import javax.persistence.Version;
 public class Scope {
 
   /**
-   * uuid.
+   * Uuid.
    */
   @Id
   @GeneratedValue(generator = "uuid")
@@ -69,11 +73,11 @@ public class Scope {
    * List of permissions for all modules contains in this scope.
    */
   @ElementCollection
-  private List<String> permissions;
+  private List<Permission> permissions;
 
   /**
    * List of modules.
    */
-  @ElementCollection
-  private List<String> modules;
+  @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  private List<Module> modules;
 }

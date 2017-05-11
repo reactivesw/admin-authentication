@@ -21,14 +21,14 @@ import javax.persistence.Version;
  * Module is the minimum of resource.
  */
 @Entity
-@Table(name = "model")
+@Table(name = "module")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @EntityListeners(AuditingEntityListener.class)
 public class Module {
 
   /**
-   * uuid.
+   * Uuid.
    */
   @Id
   @GeneratedValue(generator = "uuid")

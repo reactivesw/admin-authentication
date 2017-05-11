@@ -89,9 +89,9 @@ public final class JsonUtils {
 
     try {
       return OBJECT_MAPPER.writeValueAsString(obj);
-    } catch (JsonProcessingException e) {
-      LOG.debug("Error serializing object", e);
-      throw new IllegalArgumentException("Error serializing object: " + e.getMessage());
+    } catch (JsonProcessingException ex) {
+      LOG.debug("Error serializing object", ex);
+      throw new IllegalArgumentException("Error serializing object: " + ex.getMessage());
     }
   }
 
@@ -106,7 +106,7 @@ public final class JsonUtils {
     try {
       OBJECT_MAPPER.readTree(string);
       result = true;
-    } catch (IOException e) {
+    } catch (IOException ex) {
       result = false;
     }
     return result;
@@ -126,7 +126,7 @@ public final class JsonUtils {
       try {
         OBJECT_MAPPER.readValue(value, clazz);
         result = true;
-      } catch (IOException e) {
+      } catch (IOException ex) {
         // do nothing
         LOG.debug("string is not valid json. string: {}", value);
       }
