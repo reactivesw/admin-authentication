@@ -10,10 +10,4 @@ public final class UpdateActionUtils {
    */
   public static final String UPDATE_MODULE = "updateModule";
 
-  /**
-   * Default private constructor.
-   */
-  private UpdateActionUtils() {
-  }
-
 }

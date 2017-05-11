@@ -73,7 +73,7 @@ public class ModuleService {
     List<Module> moduleList = this.moduleRepository.findAll();
 
     LOG.debug("Exit. moduleSize: {}.", moduleList.size());
-    LOG.trace("Exit. module: {}.", moduleList);
+    LOG.trace("ModuleList: {}.", moduleList);
     return moduleList;
   }
 

@@ -77,7 +77,7 @@ public class ModuleController {
 
     ModuleView view = moduleApplication.getById(id);
 
-    LOG.info("Exit. view: {}.", view);
+    LOG.info("Exit. moduleView: {}.", view);
     return view;
   }
 
@@ -96,7 +96,7 @@ public class ModuleController {
     ModuleView view = moduleApplication.update(id, updateRequest.getVersion(), updateRequest
         .getActions());
 
-    LOG.info("Exit. view: {}.", view);
+    LOG.info("Exit. moduleView: {}.", view);
     return view;
   }
 }
