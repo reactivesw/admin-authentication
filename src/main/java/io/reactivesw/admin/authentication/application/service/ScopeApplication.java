@@ -47,11 +47,14 @@ public class ScopeApplication {
   public ScopeView create(ScopeDraft draft) {
     LOG.debug("Enter. draft: {}.", draft);
 
-    List<Permission> permissions = PermissionMapper.toModel(draft.getPermissions());
-    List<Module> modules = moduleService.getListById(draft.getModules());
     Scope scope = ScopeMapper.toModel(draft);
+
+    List<Permission> permissions = PermissionMapper.toModel(draft.getPermissions());
     scope.setPermissions(permissions);
+
+    List<Module> modules = moduleService.getListById(draft.getModules());
     scope.setModules(modules);
+
     Scope savedScope = scopeService.save(scope);
 
     ScopeView scopeView = ScopeMapper.toView(savedScope);
@@ -60,5 +63,20 @@ public class ScopeApplication {
     return scopeView;
   }
 
+  /**
+   * Get ScopeView by id.
+   *
+   * @param id String
+   * @return ScopeView
+   */
+  public ScopeView getById(String id) {
+    LOG.debug("Enter. id: {}.", id);
+
+    Scope scope = scopeService.getById(id);
+    ScopeView view = ScopeMapper.toView(scope);
+
+    LOG.debug("Enter. scopeView: {}.", view);
+    return view;
+  }
 }
 
