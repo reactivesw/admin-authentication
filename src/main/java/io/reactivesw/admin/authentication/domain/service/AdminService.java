@@ -33,6 +33,7 @@ public class AdminService {
   public Admin create(Admin admin) {
     LOG.debug("Enter. admin: {}.", admin);
 
+    //TODO the role should not be created by default, so before saved into db, make sure the roles exist.
     Admin savedAdmin = this.adminRepository.save(admin);
 
     LOG.debug("Exit. admin: {}.", savedAdmin);
