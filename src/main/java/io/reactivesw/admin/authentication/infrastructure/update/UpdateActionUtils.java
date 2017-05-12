@@ -36,4 +36,14 @@ public final class UpdateActionUtils {
    */
   public static final String SET_ROLE_SCOPES = "setRoleScopes";
 
+  /**
+   * Change admin password.
+   */
+  public static final String CHANGE_ADMIN_PASSWORD = "changeAdminPassword";
+
+  /**
+   * Set admin roles.
+   */
+  public static final String SET_ADMIN_ROLES = "setAdminRoles";
+
 }

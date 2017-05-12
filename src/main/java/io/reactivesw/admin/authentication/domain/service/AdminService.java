@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Admin service, used to manage admin's authentication info.
  */
@@ -30,10 +32,9 @@ public class AdminService {
    * @param admin Admin
    * @return Admin
    */
-  public Admin create(Admin admin) {
+  public Admin save(Admin admin) {
     LOG.debug("Enter. admin: {}.", admin);
 
-    //TODO the role should not be created by default, so before saved into db, make sure the roles exist.
     Admin savedAdmin = this.adminRepository.save(admin);
 
     LOG.debug("Exit. admin: {}.", savedAdmin);
@@ -71,6 +72,22 @@ public class AdminService {
     LOG.debug("Exit. admin: {}.", admin);
 
     return admin;
+  }
+
+  /**
+   * Get all admin from database.
+   *
+   * @return List of admin
+   */
+  public List<Admin> getAll() {
+    LOG.debug("Enter.");
+
+    List<Admin> admins = adminRepository.findAll();
+
+    LOG.debug("Exit. adminSize: {}.", admins.size());
+    LOG.trace("AdminList: {}.", admins);
+
+    return admins;
   }
 
 }

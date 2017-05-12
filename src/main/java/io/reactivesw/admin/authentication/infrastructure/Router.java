@@ -50,4 +50,14 @@ public class Router {
    * Role with id.
    */
   public static final String ROLE_WITH_ID = ROLE_ROOT + ID;
+
+  /**
+   * Admin root.
+   */
+  public static final String ADMIN_ROOT = AUTHENTICATION_ROOT + "admins/";
+
+  /**
+   * Admin with id.
+   */
+  public static final String ADMIN_WITH_ID = ADMIN_ROOT + ID;
 }
