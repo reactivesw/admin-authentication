@@ -25,4 +25,15 @@ public final class UpdateActionUtils {
    */
   public static final String SET_SCOPE_MODULES = "setScopeModules";
 
+
+  /**
+   * Set role name.
+   */
+  public static final String SET_ROLE_NAME = "setRoleName";
+
+  /**
+   * Set role scopes.
+   */
+  public static final String SET_ROLE_SCOPES = "setRoleScopes";
+
 }

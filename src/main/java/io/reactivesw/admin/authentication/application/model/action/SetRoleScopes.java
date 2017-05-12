@@ -4,19 +4,21 @@ import io.reactivesw.admin.authentication.infrastructure.update.UpdateAction;
 import io.reactivesw.admin.authentication.infrastructure.update.UpdateActionUtils;
 import lombok.Data;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 /**
- * Set scope name
+ * Set role scopes.
  */
 @Data
-public class SetScopeName implements UpdateAction {
+public class SetRoleScopes implements UpdateAction {
 
   /**
-   * Scope name.
+   * List of scopes.
    */
   @NotNull
-  private String scopeName;
+  private List<String> scopes;
 
   /**
    * Get action name.
@@ -25,6 +27,6 @@ public class SetScopeName implements UpdateAction {
    */
   @Override
   public String getActionName() {
-    return UpdateActionUtils.SET_SCOPE_NAME;
+    return UpdateActionUtils.SET_ROLE_SCOPES;
   }
 }

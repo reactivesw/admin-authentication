@@ -7,13 +7,13 @@ import lombok.Data;
 import javax.validation.constraints.NotNull;
 
 /**
- * Set scope name
+ * Set role name
  */
 @Data
-public class SetScopeName implements UpdateAction {
+public class SetRoleName implements UpdateAction {
 
   /**
-   * Scope name.
+   * Role name.
    */
   @NotNull
   private String scopeName;
@@ -25,6 +25,6 @@ public class SetScopeName implements UpdateAction {
    */
   @Override
   public String getActionName() {
-    return UpdateActionUtils.SET_SCOPE_NAME;
+    return UpdateActionUtils.SET_ROLE_NAME;
   }
 }

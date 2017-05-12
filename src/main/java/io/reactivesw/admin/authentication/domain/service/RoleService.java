@@ -2,10 +2,14 @@ package io.reactivesw.admin.authentication.domain.service;
 
 import io.reactivesw.admin.authentication.domain.model.Role;
 import io.reactivesw.admin.authentication.infrastructure.repository.RoleRepository;
+import io.reactivesw.exception.NotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Role service, used to manage roles.
@@ -30,7 +34,7 @@ public class RoleService {
    * @param role Role
    * @return Role
    */
-  public Role create(Role role) {
+  public Role save(Role role) {
     LOG.debug("Enter. role: {}.", role);
 
     Role savedRole = this.roleRepository.save(role);
@@ -38,6 +42,61 @@ public class RoleService {
     LOG.debug("Exit. role: {}.", savedRole);
 
     return savedRole;
+  }
+
+
+  /**
+   * Get role by id.
+   *
+   * @param id String
+   * @return Role
+   */
+  public Role getById(String id) {
+    LOG.debug("Enter. id: {}.", id);
+
+    Role role = roleRepository.findOne(id);
+    if (role == null) {
+      throw new NotExistException("Role not exist. id: " + id);
+    }
+
+    LOG.debug("Exit. role: {}.", role);
+
+    return role;
+  }
+
+  /**
+   * Get all roles from database.
+   *
+   * @return List of role
+   */
+  public List<Role> getAll() {
+    LOG.debug("Enter.");
+
+    List<Role> roles = roleRepository.findAll();
+
+    LOG.debug("Exit. roleSize: {}.", roles.size());
+    LOG.trace("RoleList: {}.", roles);
+
+    return roles;
+  }
+
+  /**
+   * Get roles by id list
+   *
+   * @param ids list of ids
+   * @return list of role
+   */
+  public List<Role> getListById(List<String> ids) {
+    LOG.debug("Enter. ids: {}.", ids);
+
+    List<Role> roles = new ArrayList<>();
+    ids.stream().forEach(
+        id -> roles.add(getById(id))
+    );
+
+    LOG.debug("Exit. roleSize: {}.", roles.size());
+    LOG.trace("RoleList: {}.", roles);
+    return roles;
   }
 
 }
