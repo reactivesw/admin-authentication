@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -64,9 +65,10 @@ public class ScopeService {
 
   /**
    * Get all scopes from database.
+   *
    * @return List of scope
    */
-  public List<Scope> getAll(){
+  public List<Scope> getAll() {
     LOG.debug("Enter.");
 
     List<Scope> scopes = scopeRepository.findAll();
@@ -76,4 +78,24 @@ public class ScopeService {
 
     return scopes;
   }
+
+  /**
+   * Get scopes by id list
+   *
+   * @param ids list of ids
+   * @return list of scope
+   */
+  public List<Scope> getListById(List<String> ids) {
+    LOG.debug("Enter. ids: {}.", ids);
+
+    List<Scope> scopes = new ArrayList<>();
+    ids.stream().forEach(
+        id -> scopes.add(getById(id))
+    );
+
+    LOG.debug("Exit. scopeSize: {}.", scopes.size());
+    LOG.trace("ScopeList: {}.", scopes);
+    return scopes;
+  }
+
 }

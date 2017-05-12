@@ -39,4 +39,15 @@ public class Router {
    * Scope with id.
    */
   public static final String SCOPE_WITH_ID = SCOPE_ROOT + ID;
+
+
+  /**
+   * Role root.
+   */
+  public static final String ROLE_ROOT = AUTHENTICATION_ROOT + "roles/";
+
+  /**
+   * Role with id.
+   */
+  public static final String ROLE_WITH_ID = ROLE_ROOT + ID;
 }
