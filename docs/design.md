@@ -129,6 +129,44 @@ Get all modules from database.
 - Save the updated module to database
 - Convert the saved module to view and return it
 
+## 3.3 Create Scope
+Create new Scope.
+**Key Point**
+- Make sure the modules 
+### 3.3.1 Workflow
+- Receive `ScopeDraft` from request
+- Convert permission string list to permission list
+- Convert module string list to module list, if module not found, then throw exception
+- Create a new scope, and set the permission, module, name
+- Save the new scope to database
+- Convert scope to scope view and return it
+
+## 3.4 Get scope by id
+Get scope by id.
+### 3.4.1 Workflow
+- Receive id from request
+- Get scope from database, and if scope not exist, then throw exception
+- Convert scope to scope view, and return it
+
+## 3.5 Get all scopes
+Get all scopes from database.
+### 3.5.1 Workflow
+- Fetch all scopes from database
+- Convert scope list to scope view list
+- Return it
+
+## 3.6 Update scope
+- Receive id, update request form request
+- Get scope from database, and if scope not exist, then throw exception
+- Check version, if version not correct, then throw exception
+- Run each update service
+- Save the updated scope to database
+- Convert the saved scope to view and return it
+
+
+
+
+ 
 ## 3.2 Login
 Use email and password to login to the admin system, and the server will keep the session.
 
