@@ -163,6 +163,39 @@ Get all scopes from database.
 - Save the updated scope to database
 - Convert the saved scope to view and return it
 
+## 3.7 Create role
+Create new role.
+**Key Point**
+- Make sure the scope exists. 
+### 3.7.1 Workflow
+- Receive `RoleDraft` from request
+- Convert scope string list to scope list
+- Create a new Role, and set the scope, name
+- Save the new role to database
+- Convert role to role view and return it
+
+## 3.8 Get role by id
+Get role by id.
+### 3.8.1 Workflow
+- Receive id from request
+- Get role from database, and if role not exist, then throw exception
+- Convert role to role view, and return it
+
+## 3.9 Get all roles
+Get all roles from database.
+### 3.9.1 Workflow
+- Fetch all roles from database
+- Convert role list to role view list
+- Return it
+
+## 3.10 Update scope
+- Receive id, update request form request
+- Get role from database, and if role not exist, then throw exception
+- Check version, if version not correct, then throw exception
+- Run each update service
+- Save the updated role to database
+- Convert the saved role to view and return it
+
 
 
 

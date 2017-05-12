@@ -117,7 +117,7 @@ Update a existing scope.
 - Path: /scopes/{id}
 - Method: PUT
 - Payload: UpdateRequest
-- Response: Scope
+- Response: ScopeView
 
 ### 3.5 Actions
 - SetScopeName
@@ -137,6 +137,54 @@ permissions      | List<String>      | NOT NULL         | List of permissions
 |Column Name     | Type              | Nullable        | Means
 ---|---|---|---
 modules          | List<String>      | NOT NULL         | List of modules
+
+---
+
+
+## 4 Role API
+All role apis.
+
+### 4.1 Create role
+Create a new role from draft.
+- Path: /roles
+- Method: POST
+- Payload: RoleDraft
+- Response: RoleView
+
+### 4.2 Get role by id
+Get role by role id.
+- Path: /roles/{id}
+- Method: GET
+- Payload: role id
+- Response: RoleView
+
+### 4.3 Get all roles
+Get all roles.
+- Path: /roles
+- Method: GET
+- Payload: none
+- Response: List<RoleView>
+
+
+### 4.4 Update a role
+Update a existing role.
+- Path: /roles/{id}
+- Method: PUT
+- Payload: UpdateRequest
+- Response: RoleView
+
+### 4.5 Actions
+- SetRoleName
+
+|Column Name     | Type              | Nullable        | Means
+---|---|---|---
+roleName         | String            | NOT NULL         | role name
+
+- SetRoleScopes
+
+|Column Name     | Type              | Nullable        | Means
+---|---|---|---
+scopes           | List<String>      | NOT NULL         | role scope list
 
 ---
 
