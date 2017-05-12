@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -71,6 +72,25 @@ public class ModuleService {
     LOG.debug("Enter.");
 
     List<Module> moduleList = this.moduleRepository.findAll();
+
+    LOG.debug("Exit. moduleSize: {}.", moduleList.size());
+    LOG.trace("ModuleList: {}.", moduleList);
+    return moduleList;
+  }
+
+  /**
+   * Get modules by id list
+   *
+   * @param ids list of ids
+   * @return list of modules
+   */
+  public List<Module> getListById(List<String> ids) {
+    LOG.debug("Enter. ids: {}.", ids);
+
+    List<Module> moduleList = new ArrayList<>();
+    ids.stream().forEach(
+        id -> moduleList.add(getById(id))
+    );
 
     LOG.debug("Exit. moduleSize: {}.", moduleList.size());
     LOG.trace("ModuleList: {}.", moduleList);

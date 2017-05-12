@@ -27,7 +27,16 @@ public class Router {
   /**
    * Module with id.
    */
-  public static final String MODULE_ROOT_WITH_ID = MODULE_ROOT + ID;
+  public static final String MODULE_WITH_ID = MODULE_ROOT + ID;
 
 
+  /**
+   * Scope root.
+   */
+  public static final String SCOPE_ROOT = AUTHENTICATION_ROOT + "scopes/";
+
+  /**
+   * Scope with id.
+   */
+  public static final String SCOPE_WITH_ID = SCOPE_ROOT + ID;
 }

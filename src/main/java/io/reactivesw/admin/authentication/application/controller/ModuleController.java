@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 /**
  * Module controller.
  */
+@RestController
 public class ModuleController {
 
   /**
@@ -71,7 +73,7 @@ public class ModuleController {
    * @param id id
    * @return
    */
-  @GetMapping(Router.MODULE_ROOT_WITH_ID)
+  @GetMapping(Router.MODULE_WITH_ID)
   public ModuleView getModuleById(@PathVariable String id) {
     LOG.info("Enter. id: {}.", id);
 
@@ -88,7 +90,7 @@ public class ModuleController {
    * @param updateRequest updateRequest
    * @return ModuleView
    */
-  @GetMapping(Router.MODULE_ROOT_WITH_ID)
+  @GetMapping(Router.MODULE_WITH_ID)
   public ModuleView updateModule(@PathVariable String id,
                                  @RequestBody @Valid UpdateRequest updateRequest) {
     LOG.info("Enter. id: {}. updateRequest: {}.", id, updateRequest);
