@@ -2,6 +2,7 @@ package io.reactivesw.admin.authentication.application.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -9,7 +10,12 @@ import java.util.List;
  * Role View.
  */
 @Data
-public class RoleView {
+public class RoleView implements Serializable{
+
+  /**
+   * Auto generated.
+   */
+  private static final long serialVersionUID = -3232239596331705547L;
 
   /**
    * Uuid.

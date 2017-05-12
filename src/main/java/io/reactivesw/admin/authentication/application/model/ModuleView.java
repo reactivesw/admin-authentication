@@ -2,13 +2,19 @@ package io.reactivesw.admin.authentication.application.model;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 /**
  * Module view.
  */
 @Data
-public class ModuleView {
+public class ModuleView implements Serializable {
+
+  /**
+   * Auto generated.
+   */
+  private static final long serialVersionUID = -1802486871386834646L;
 
   /**
    * UUID.
