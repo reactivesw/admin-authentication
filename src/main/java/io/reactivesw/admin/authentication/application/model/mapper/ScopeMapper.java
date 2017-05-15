@@ -6,7 +6,6 @@ import io.reactivesw.admin.authentication.domain.model.Scope;
 import io.reactivesw.admin.authentication.infrastructure.enums.Permission;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -47,7 +46,7 @@ public final class ScopeMapper {
     view.setScopeName(scope.getScopeName());
     view.setModuleViews(ModuleMapper.toModel(scope.getModules()));
     List<Permission> permissions = new ArrayList<>();
-    Collections.copy(scope.getPermissions(), permissions);
+    permissions.addAll(scope.getPermissions());
     view.setPermissions(permissions);
 
     return view;
