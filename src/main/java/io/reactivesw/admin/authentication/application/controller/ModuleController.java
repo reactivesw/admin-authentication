@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +43,7 @@ public class ModuleController {
    * @return Module
    */
   @PostMapping(Router.MODULE_ROOT)
-  public ModuleView create(ModuleDraft draft) {
+  public ModuleView create(@RequestBody @Valid ModuleDraft draft) {
     LOG.info("Enter. moduleDraft: {}.", draft);
 
     ModuleView view = moduleApplication.create(draft);
@@ -90,7 +91,7 @@ public class ModuleController {
    * @param updateRequest updateRequest
    * @return ModuleView
    */
-  @GetMapping(Router.MODULE_WITH_ID)
+  @PutMapping(Router.MODULE_WITH_ID)
   public ModuleView updateModule(@PathVariable String id,
                                  @RequestBody @Valid UpdateRequest updateRequest) {
     LOG.info("Enter. id: {}. updateRequest: {}.", id, updateRequest);

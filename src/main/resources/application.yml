@@ -1,10 +1,10 @@
 server:
-  port: 8083
+  port: 9091
 
 spring:
   datasource:
 #    url: jdbc:postgresql://104.155.176.8:5432/reactivesw
-    url: jdbc:postgresql://localhost:5432/customer_authentication
+    url: jdbc:postgresql://localhost:5432/admin_authentication
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver
@@ -13,20 +13,6 @@ spring:
     show-sql: false
     hibernate:
       ddl-auto: update
-
-io:
-  reactivesw:
-    message:
-      broker:
-        host: http://umasuo.com
-      brokerType: google
-      topic:
-        signin:
-          name: reactivesw-customer-login
-          version: 1
-      google:
-        project:
-          id: reactivesw-project
 
 jwt:
   secret: QWERTYUIOPASDFGHJKLZXCVBNM

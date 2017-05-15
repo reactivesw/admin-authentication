@@ -76,7 +76,6 @@ public class LoginApplication {
     AdminView adminView = AdminMapper.toModel(admin);
     result.setAdminView(adminView);
 
-    // todo cache login result, and send event.
     cacheLoginStatus(result);
     LOG.debug("Enter. loginResult: {}.", result);
     return result;
@@ -101,6 +100,6 @@ public class LoginApplication {
 
     redisTemplate.boundHashOps(mapKey).put(fieldKey, adminSession);
 
-    LOG.debug("exit. SignInStatus: {}", adminSession);
+    LOG.debug("Exit. adminSession: {}", adminSession);
   }
 }
