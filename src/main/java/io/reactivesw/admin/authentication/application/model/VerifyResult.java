@@ -23,4 +23,9 @@ public class VerifyResult implements Serializable {
    * Has the right permissions.
    */
   private boolean hashPermission;
+
+  /**
+   * Admin id.
+   */
+  private String adminId;
 }

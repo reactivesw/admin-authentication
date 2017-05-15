@@ -62,6 +62,7 @@ public class VerifyApplication {
     AdminSession adminSession = (AdminSession) redisTemplate.boundHashOps(mapKey).get(tokenId);
 
     VerifyResult result = new VerifyResult();
+    result.setAdminId(adminId);
     result.setLogin(verifyLoginStatus(adminSession, mapKey, tokenId));
     result.setHashPermission(verifyPermission(adminSession, resource, action));
 
