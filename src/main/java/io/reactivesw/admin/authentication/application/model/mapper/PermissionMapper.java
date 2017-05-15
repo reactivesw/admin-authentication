@@ -23,7 +23,7 @@ public final class PermissionMapper {
    * @param permissions permission string list
    * @return List of permissions
    */
-  public static List<Permission> toModel(List<String> permissions) {
+  public static List<Permission> toEntity(List<String> permissions) {
 
     List<Permission> permissionList = new ArrayList<>();
     permissions.stream().forEach(
@@ -31,6 +31,24 @@ public final class PermissionMapper {
           Permission permission = Permission.getPermission(perStr);
           if (permission != null) {
             permissionList.add(permission);
+          }
+        }
+    );
+    return permissionList;
+  }
+
+  /**
+   * Convert permission list to string list.
+   * @param permissions Permission list
+   * @return String list
+   */
+  public static List<String> toModel(List<Permission> permissions){
+    List<String> permissionList = new ArrayList<>();
+    permissions.stream().forEach(
+         permission -> {
+          String perStr = permission.getValue();
+          if (perStr != null) {
+            permissionList.add(perStr);
           }
         }
     );

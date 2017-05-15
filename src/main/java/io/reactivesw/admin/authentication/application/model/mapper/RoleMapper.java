@@ -43,7 +43,7 @@ public final class RoleMapper {
     view.setLastModifiedAt(role.getLastModifiedAt());
     view.setVersion(role.getVersion());
     view.setRoleName(role.getRoleName());
-    view.setScopes(ScopeMapper.toModel(role.getScopes()));
+    view.setScopeViews(ScopeMapper.toModel(role.getScopes()));
 
     return view;
   }

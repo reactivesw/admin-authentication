@@ -16,7 +16,8 @@ public class ScopeView implements Serializable{
   /**
    * Auto generated.
    */
-  private static final long serialVersionUID = 6576196609913807098L;
+  private static final long serialVersionUID = 5813425169221538791L;
+
 
   /**
    * Uuid.
@@ -49,7 +50,7 @@ public class ScopeView implements Serializable{
   private List<Permission> permissions;
 
   /**
-   * List of modules.
+   * List of moduleViews.
    */
-  private List<ModuleView> modules;
+  private List<ModuleView> moduleViews;
 }

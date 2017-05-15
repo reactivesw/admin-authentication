@@ -3,8 +3,10 @@ package io.reactivesw.admin.authentication.application.model.mapper;
 import io.reactivesw.admin.authentication.application.model.ScopeDraft;
 import io.reactivesw.admin.authentication.application.model.ScopeView;
 import io.reactivesw.admin.authentication.domain.model.Scope;
+import io.reactivesw.admin.authentication.infrastructure.enums.Permission;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,8 +45,10 @@ public final class ScopeMapper {
     view.setLastModifiedAt(scope.getLastModifiedAt());
     view.setVersion(scope.getVersion());
     view.setScopeName(scope.getScopeName());
-    view.setModules(ModuleMapper.toModel(scope.getModules()));
-    view.setPermissions(scope.getPermissions());
+    view.setModuleViews(ModuleMapper.toModel(scope.getModules()));
+    List<Permission> permissions = new ArrayList<>();
+    Collections.copy(scope.getPermissions(), permissions);
+    view.setPermissions(permissions);
 
     return view;
   }

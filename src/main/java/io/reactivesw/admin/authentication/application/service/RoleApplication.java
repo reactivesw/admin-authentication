@@ -84,9 +84,9 @@ public class RoleApplication {
   }
 
   /**
-   * Get all roles.
+   * Get all roleViews.
    *
-   * @return List of roles view
+   * @return List of roleViews
    */
   public List<RoleView> getAll() {
     LOG.debug("Enter.");

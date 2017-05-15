@@ -19,7 +19,7 @@ public class RoleDraft {
   private String roleName;
 
   /**
-   * List of scopes.
+   * List of scope ids.
    */
   private List<String> scopes;
 }

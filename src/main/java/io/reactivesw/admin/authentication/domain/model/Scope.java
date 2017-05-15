@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 
 /**
- * Scope is a combination of modules and permissions.
+ * Scope is a combination of moduleViews and permissions.
  */
 @Entity
 @Table(name = "scope")

@@ -85,11 +85,11 @@ public class ScopeController {
 
 
   /**
-   * Update one scope
+   * Update one scope.
    *
    * @param id            String
    * @param updateRequest UpdateRequest
-   * @return
+   * @return ScopeView
    */
   @PutMapping(Router.SCOPE_WITH_ID)
   public ScopeView update(@PathVariable String id,

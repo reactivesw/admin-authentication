@@ -45,7 +45,7 @@ public final class AdminMapper {
     view.setLastModifiedAt(admin.getLastModifiedAt());
     view.setVersion(admin.getVersion());
     view.setEmail(admin.getEmail());
-    view.setRoles(RoleMapper.toModel(admin.getRoles()));
+    view.setRoleViews(RoleMapper.toModel(admin.getRoles()));
 
     return view;
   }

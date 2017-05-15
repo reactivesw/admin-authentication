@@ -27,7 +27,7 @@ public class AdminDraft {
   private String password;
 
   /**
-   * List of roles.
+   * List of role ids.
    */
   private List<String> roles;
 }

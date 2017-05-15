@@ -24,7 +24,7 @@ public class ScopeDraft {
   private List<String> permissions;
 
   /**
-   * List of modules.
+   * List of module ids.
    */
   private List<String> modules;
 }

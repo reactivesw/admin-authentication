@@ -58,7 +58,7 @@ public class ScopeApplication {
 
     Scope scope = ScopeMapper.toEntity(draft);
 
-    List<Permission> permissions = PermissionMapper.toModel(draft.getPermissions());
+    List<Permission> permissions = PermissionMapper.toEntity(draft.getPermissions());
     scope.setPermissions(permissions);
 
     List<Module> modules = moduleService.getListById(draft.getModules());
@@ -89,7 +89,7 @@ public class ScopeApplication {
   }
 
   /**
-   * Get all scopes.
+   * Get all scopeViews.
    *
    * @return List of scope view
    */

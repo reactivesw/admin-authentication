@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 public class SetScopeModules implements UpdateAction {
 
   /**
-   * List of modules.
+   * List of module ids.
    */
   @NotNull
   private List<String> modules;

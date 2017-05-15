@@ -44,7 +44,7 @@ public class RoleView implements Serializable{
   private String roleName;
 
   /**
-   * List of scopes.
+   * List of scopeViews.
    */
-  private List<ScopeView> scopes;
+  private List<ScopeView> scopeViews;
 }

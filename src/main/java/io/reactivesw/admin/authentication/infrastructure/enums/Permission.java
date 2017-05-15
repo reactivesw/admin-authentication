@@ -7,7 +7,7 @@ public enum Permission {
   /**
    * Permission for save a resource.
    */
-  CREATE("save"),
+  CREATE("create"),
 
   /**
    * Permission for read a resource.

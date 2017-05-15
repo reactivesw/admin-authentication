@@ -44,7 +44,7 @@ public class AdminView implements Serializable {
   private String email;
 
   /**
-   * List of roles.
+   * List of roleViews.
    */
-  private List<RoleView> roles;
+  private List<RoleView> roleViews;
 }
