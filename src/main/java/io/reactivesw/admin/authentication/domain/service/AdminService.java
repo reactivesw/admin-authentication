@@ -2,9 +2,12 @@ package io.reactivesw.admin.authentication.domain.service;
 
 import io.reactivesw.admin.authentication.domain.model.Admin;
 import io.reactivesw.admin.authentication.infrastructure.repository.AdminRepository;
+import io.reactivesw.exception.AlreadyExistException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,11 +38,22 @@ public class AdminService {
   public Admin save(Admin admin) {
     LOG.debug("Enter. admin: {}.", admin);
 
-    Admin savedAdmin = this.adminRepository.save(admin);
+    try {
+      Admin savedAdmin = this.adminRepository.save(admin);
 
-    LOG.debug("Exit. admin: {}.", savedAdmin);
+      LOG.debug("Exit. admin: {}.", savedAdmin);
 
-    return savedAdmin;
+      return savedAdmin;
+    } catch (DataIntegrityViolationException ex) {
+      ConstraintViolationException ee = (ConstraintViolationException) ex.getCause();
+      String state = ee.getSQLState();
+      // 23505 means sql some unique column already exist
+      if ("23505".equals(state)) {
+        throw new AlreadyExistException("Admin already exist.");
+      } else {
+        throw ex;
+      }
+    }
   }
 
   /**

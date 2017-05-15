@@ -2,10 +2,13 @@ package io.reactivesw.admin.authentication.domain.service;
 
 import io.reactivesw.admin.authentication.domain.model.Module;
 import io.reactivesw.admin.authentication.infrastructure.repository.ModuleRepository;
+import io.reactivesw.exception.AlreadyExistException;
 import io.reactivesw.exception.NotExistException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,11 +41,22 @@ public class ModuleService {
   public Module save(Module module) {
     LOG.debug("Enter. module: {}.", module);
 
-    Module savedModule = this.moduleRepository.save(module);
+    try {
+      Module savedModule = this.moduleRepository.save(module);
 
-    LOG.debug("Exit. module: {}.", savedModule);
+      LOG.debug("Exit. module: {}.", savedModule);
 
-    return savedModule;
+      return savedModule;
+    } catch (DataIntegrityViolationException ex) {
+      ConstraintViolationException ee = (ConstraintViolationException) ex.getCause();
+      String state = ee.getSQLState();
+      // 23505 means sql some unique column already exist
+      if ("23505".equals(state)) {
+        throw new AlreadyExistException("Module already exist.");
+      } else {
+        throw ex;
+      }
+    }
   }
 
   /**

@@ -43,7 +43,7 @@ public class ModuleController {
    * @return Module
    */
   @PostMapping(Router.MODULE_ROOT)
-  public ModuleView create(ModuleDraft draft) {
+  public ModuleView create(@RequestBody @Valid ModuleDraft draft) {
     LOG.info("Enter. moduleDraft: {}.", draft);
 
     ModuleView view = moduleApplication.create(draft);

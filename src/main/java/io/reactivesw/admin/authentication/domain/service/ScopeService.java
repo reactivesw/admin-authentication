@@ -2,10 +2,13 @@ package io.reactivesw.admin.authentication.domain.service;
 
 import io.reactivesw.admin.authentication.domain.model.Scope;
 import io.reactivesw.admin.authentication.infrastructure.repository.ScopeRepository;
+import io.reactivesw.exception.AlreadyExistException;
 import io.reactivesw.exception.NotExistException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,11 +40,24 @@ public class ScopeService {
   public Scope save(Scope scope) {
     LOG.debug("Enter. scope: {}.", scope);
 
-    Scope savedScope = scopeRepository.save(scope);
+    try {
 
-    LOG.debug("Exit. scope: {}.", savedScope);
+      Scope savedScope = scopeRepository.save(scope);
+      LOG.debug("Exit. scope: {}.", savedScope);
 
-    return savedScope;
+      return savedScope;
+
+    } catch (DataIntegrityViolationException ex) {
+      ConstraintViolationException ee = (ConstraintViolationException) ex.getCause();
+      String state = ee.getSQLState();
+      // 23505 means sql some unique column already exist
+      if ("23505".equals(state)) {
+        throw new AlreadyExistException("Scope already exist.");
+      } else {
+        throw ex;
+      }
+    }
+
   }
 
   /**

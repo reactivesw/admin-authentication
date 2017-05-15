@@ -2,10 +2,13 @@ package io.reactivesw.admin.authentication.domain.service;
 
 import io.reactivesw.admin.authentication.domain.model.Role;
 import io.reactivesw.admin.authentication.infrastructure.repository.RoleRepository;
+import io.reactivesw.exception.AlreadyExistException;
 import io.reactivesw.exception.NotExistException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,12 +39,23 @@ public class RoleService {
    */
   public Role save(Role role) {
     LOG.debug("Enter. role: {}.", role);
+    try {
 
-    Role savedRole = this.roleRepository.save(role);
+      Role savedRole = this.roleRepository.save(role);
 
-    LOG.debug("Exit. role: {}.", savedRole);
+      LOG.debug("Exit. role: {}.", savedRole);
 
-    return savedRole;
+      return savedRole;
+    } catch (DataIntegrityViolationException ex) {
+      ConstraintViolationException ee = (ConstraintViolationException) ex.getCause();
+      String state = ee.getSQLState();
+      // 23505 means sql some unique column already exist
+      if ("23505".equals(state)) {
+        throw new AlreadyExistException("Role already exist.");
+      } else {
+        throw ex;
+      }
+    }
   }
 
 
