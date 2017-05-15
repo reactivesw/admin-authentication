@@ -1,6 +1,7 @@
 package io.reactivesw.admin.authentication.application.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Admin session for save each sessions of those who has login.
@@ -30,16 +31,17 @@ public class AdminSession implements Serializable {
   /**
    * Admin info.
    */
-  private AdminView admin;
+  private List<ScopeView> scopeViews;
 
   /**
    * Constructor.
    */
-  public AdminSession(long loginTime, long lastVisitTime, long expiresIn, AdminView adminView) {
+  public AdminSession(long loginTime, long lastVisitTime, long expiresIn,
+                      List<ScopeView> scopeViews) {
     this.loginTime = loginTime;
     this.lastVisitTime = lastVisitTime;
     this.expiresIn = expiresIn;
-    this.admin = adminView;
+    this.scopeViews = scopeViews;
   }
 
   /**
@@ -99,18 +101,18 @@ public class AdminSession implements Serializable {
   /**
    * Getter.
    *
-   * @return AdminView
+   * @return list of scopeViews
    */
-  public AdminView getAdmin() {
-    return admin;
+  public List<ScopeView> getScopeViews() {
+    return scopeViews;
   }
 
   /**
    * Setter.
    *
-   * @param admin AdminView
+   * @param scopeViews list of ScopeView
    */
-  public void setAdmin(AdminView admin) {
-    this.admin = admin;
+  public void setScopeViews(List<ScopeView> scopeViews) {
+    this.scopeViews = scopeViews;
   }
 }

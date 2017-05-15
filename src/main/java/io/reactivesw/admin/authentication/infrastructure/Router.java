@@ -65,4 +65,9 @@ public class Router {
    * Admin login.
    */
   public static final String ADMIN_LOGIN = AUTHENTICATION_ROOT + "login/";
+
+  /**
+   * Admin session status.
+   */
+  public static final String ADMIN_SESSION_STATUS = AUTHENTICATION_ROOT + "status/";
 }

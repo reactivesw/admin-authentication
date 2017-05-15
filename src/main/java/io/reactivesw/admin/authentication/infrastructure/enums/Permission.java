@@ -7,22 +7,22 @@ public enum Permission {
   /**
    * Permission for save a resource.
    */
-  CREATE("create"),
+  CREATE("CREATE"),
 
   /**
    * Permission for read a resource.
    */
-  READ("read"),
+  READ("READ"),
 
   /**
    * Permission for update a resource.
    */
-  UPDATE("update"),
+  UPDATE("UPDATE"),
 
   /**
    * Permission for delete a resource.
    */
-  DELETE("delete");
+  DELETE("DELETE");
 
   /**
    * Value.
@@ -56,16 +56,19 @@ public enum Permission {
   public static Permission getPermission(String value) {
     Permission result = null;
     switch (value) {
-      case "save":
+      case "CREATE":
+      case "POST":
         result = CREATE;
         break;
-      case "read":
+      case "READ":
+      case "GET":
         result = READ;
         break;
-      case "update":
+      case "UPDATE":
+      case "PUT":
         result = UPDATE;
         break;
-      case "delete":
+      case "DELETE":
         result = DELETE;
         break;
       default:
