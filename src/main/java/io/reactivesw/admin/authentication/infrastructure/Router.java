@@ -60,4 +60,9 @@ public class Router {
    * Admin with id.
    */
   public static final String ADMIN_WITH_ID = ADMIN_ROOT + ID;
+
+  /**
+   * Admin login.
+   */
+  public static final String ADMIN_LOGIN = AUTHENTICATION_ROOT + "/login";
 }

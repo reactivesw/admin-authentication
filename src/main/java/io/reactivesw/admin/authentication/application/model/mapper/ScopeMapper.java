@@ -43,7 +43,7 @@ public final class ScopeMapper {
     view.setLastModifiedAt(scope.getLastModifiedAt());
     view.setVersion(scope.getVersion());
     view.setScopeName(scope.getScopeName());
-    view.setModules(scope.getModules());
+    view.setModules(ModuleMapper.toModel(scope.getModules()));
     view.setPermissions(scope.getPermissions());
 
     return view;

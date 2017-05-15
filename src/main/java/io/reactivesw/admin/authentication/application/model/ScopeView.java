@@ -1,9 +1,9 @@
 package io.reactivesw.admin.authentication.application.model;
 
-import io.reactivesw.admin.authentication.domain.model.Module;
 import io.reactivesw.admin.authentication.infrastructure.enums.Permission;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -11,7 +11,12 @@ import java.util.List;
  * Scope View.
  */
 @Data
-public class ScopeView {
+public class ScopeView implements Serializable{
+
+  /**
+   * Auto generated.
+   */
+  private static final long serialVersionUID = 6576196609913807098L;
 
   /**
    * Uuid.
@@ -46,5 +51,5 @@ public class ScopeView {
   /**
    * List of modules.
    */
-  private List<Module> modules;
+  private List<ModuleView> modules;
 }
