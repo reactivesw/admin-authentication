@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -90,6 +91,7 @@ public class RoleController {
    * @param updateRequest UpdateRequest
    * @return RoleView
    */
+  @PutMapping(Router.ROLE_WITH_ID)
   public RoleView update(@PathVariable String id,
                           @RequestBody @Valid UpdateRequest updateRequest) {
     LOG.info("Enter. id: {}. updateRequest: {}.", id, updateRequest);
