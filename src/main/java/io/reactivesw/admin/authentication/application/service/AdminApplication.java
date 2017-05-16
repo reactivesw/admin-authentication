@@ -2,6 +2,7 @@ package io.reactivesw.admin.authentication.application.service;
 
 import io.reactivesw.admin.authentication.application.model.AdminDraft;
 import io.reactivesw.admin.authentication.application.model.AdminView;
+import io.reactivesw.admin.authentication.application.model.ScopeView;
 import io.reactivesw.admin.authentication.application.model.mapper.AdminMapper;
 import io.reactivesw.admin.authentication.domain.model.Admin;
 import io.reactivesw.admin.authentication.domain.model.Role;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -123,6 +125,24 @@ public class AdminApplication {
 
     LOG.debug("Exit. adminView: {}.", view);
     return view;
+  }
+
+  /**
+   * Get all scopes from admin.
+   *
+   * @param adminId admin id
+   * @return list of ScopeView
+   */
+  public List<ScopeView> getScopes(String adminId) {
+    LOG.debug("Enter. adminId: {}.", adminId);
+    AdminView adminView = getById(adminId);
+    List<ScopeView> scopeViews = new ArrayList<>();
+    adminView.getRoleViews().stream().forEach(
+        roleView -> scopeViews.addAll(roleView.getScopeViews())
+    );
+    LOG.debug("Exit. scopeViews size: {}.", scopeViews.size());
+    LOG.trace("ScopeViews: {}.", scopeViews);
+    return scopeViews;
   }
 
   /**

@@ -4,7 +4,6 @@ import io.reactivesw.admin.authentication.application.model.AdminSession;
 import io.reactivesw.admin.authentication.application.model.AdminView;
 import io.reactivesw.admin.authentication.application.model.Login;
 import io.reactivesw.admin.authentication.application.model.LoginResult;
-import io.reactivesw.admin.authentication.application.model.ScopeView;
 import io.reactivesw.admin.authentication.application.model.mapper.AdminMapper;
 import io.reactivesw.admin.authentication.domain.model.Admin;
 import io.reactivesw.admin.authentication.domain.service.AdminService;
@@ -18,9 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Login applications.
@@ -99,28 +95,11 @@ public class LoginApplication {
     String fieldKey = jwtUtil.parseToken(result.getToken()).getTokenId();
 
     long curTime = System.currentTimeMillis();
-    AdminSession adminSession = new AdminSession(curTime, curTime, appConfig.getExpiresIn(),
-        getScopes(result.getAdminView()));
+    AdminSession adminSession = new AdminSession(curTime, curTime, appConfig.getExpiresIn());
 
     redisTemplate.boundHashOps(mapKey).put(fieldKey, adminSession);
 
     LOG.debug("Exit. adminSession: {}", adminSession);
   }
 
-  /**
-   * Get all scopes from admin.
-   *
-   * @param adminView admin view
-   * @return list of ScopeView
-   */
-  private List<ScopeView> getScopes(AdminView adminView) {
-    LOG.debug("Enter. adminView: {}.", adminView);
-    List<ScopeView> scopeViews = new ArrayList<>();
-    adminView.getRoleViews().stream().forEach(
-        roleView -> scopeViews.addAll(roleView.getScopeViews())
-    );
-    LOG.debug("Exit. scopeViews size: {}.", scopeViews.size());
-    LOG.trace("ScopeViews: {}.", scopeViews);
-    return scopeViews;
-  }
 }
