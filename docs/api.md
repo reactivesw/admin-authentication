@@ -13,7 +13,6 @@ version         | Integer           | Auto increment    | version
 moduleName      | String            | None              | module name
 path            | String            | None              | path of module
 
----
 
 - ModuleDraft
 
@@ -34,7 +33,7 @@ lastModifiedAt  | ZonedDateTime     | Pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", 
 version         | Integer           | Auto increment    | version
 scopeName       | String            | None              | scope name
 permissions     | List<Permission>  | None              | List of permissions
-modules         | List<Module>      | None              | List of modules
+moduleViews         | List<Module>      | None              | List of modules
 
 - ScopeDraft
 
@@ -43,6 +42,66 @@ modules         | List<Module>      | None              | List of modules
 scopeName       | String            | None              | scope name
 permissions     | List<String>      | None              | List of permission ids
 modules         | List<String>      | None              | List of module ids
+
+---
+
+- RoleView
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+id              | String            | UUID              | id, auto generated
+createdAt       | ZonedDateTime     | Pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC"    | created time.
+lastModifiedAt  | ZonedDateTime     | Pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC"    | Last modified time.
+version         | Integer           | Auto increment    | version
+roleName        | String            | None              | role name
+scopeViews      | List<ScopeView>   | None              | List of scope views
+
+- RoleDraft
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+roleName        | String            | NOT NULL              | role name
+scopeViews      | List<String>      | None                  | List of scope ids
+
+---
+
+- AdminView
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+id              | String            | UUID              | id, auto generated
+createdAt       | ZonedDateTime     | Pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC"    | created time.
+lastModifiedAt  | ZonedDateTime     | Pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "UTC"    | Last modified time.
+version         | Integer           | Auto increment    | version
+email           | String            | None              | email name
+roleViews       | List<RoleView>    | None              | List of role views
+
+- AdminDraft
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+email           | String            | None              | email name
+roleViews       | List<String>      | None              | List of role ids
+
+---
+
+- LoginResult
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+adminView        | AdminView         | None              | admin view
+token            | String            | None              | string
+
+- Login
+
+|Column Name     | Type              | Constraint        | Means
+---|---|---|---
+email            | String            | None              | email
+password         | String            | None              | password
+
+---
+
+
 
 
 ## 2 Module API
@@ -185,6 +244,54 @@ roleName         | String            | NOT NULL         | role name
 |Column Name     | Type              | Nullable        | Means
 ---|---|---|---
 scopes           | List<String>      | NOT NULL         | role scope list
+
+---
+
+## 5 Admin API
+All admin apis.
+
+### 5.1 Create admin
+Create a new admin from draft.
+- Path: /admins
+- Method: POST
+- Payload: AdminDraft
+- Response: AdminView
+
+### 5.2 Get admin by id
+Get admin by admin id.
+- Path: /admins/{id}
+- Method: GET
+- Payload: admin id
+- Response: AdminView
+
+### 5.3 Get all admins
+Get all admins.
+- Path: /admins
+- Method: GET
+- Payload: none
+- Response: List<AdminView>
+
+
+### 5.4 Update a admin
+Update a existing admin.
+- Path: /admins/{id}
+- Method: PUT
+- Payload: UpdateRequest
+- Response: AdminView
+
+### 5.5 Actions
+- SetAdminRoles
+
+|Column Name     | Type              | Nullable        | Means
+---|---|---|---
+roles            | List<String>      | NOT NULL        | list of role ids
+
+- ChangeAdminPassword
+
+|Column Name     | Type              | Nullable        | Means
+---|---|---|---
+newPassword      | String           | NOT NULL         | new password
+oldPassword      | String           | NOT NULL         | old password
 
 ---
 

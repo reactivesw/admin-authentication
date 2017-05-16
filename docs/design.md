@@ -83,45 +83,65 @@ This doc describes the design of admin authentication service.
   String path;
 ```
 
-# 3. Detail design
+- Model: AdminSession
+```java
+  
+  private long loginTime;
 
-## 3.1 Add admin
-Add an admin of the shop to the system.
-**Key Points**
-- Make sure the roles contained exists in the system.
+  private long lastVisitTime;
 
-### 3.1.1 Workflow
-- Receive email, password and role list from request
-- Check if the password is correct and the roles exist in the system
-- Save the new admin to database
-- Return the saved admin
+  private long expiresIn;
+```
 
-## 3.2 Create module
+- Model: VerifyBody
+```java
+
+  private String token;
+
+  private String resource;
+
+  private String action;
+```
+
+- Model: VerifyResult
+```java
+
+  private boolean isLogin;
+
+  private boolean hashPermission;
+
+  private String adminId;
+```
+
+
+# 3 Module design 
+
+## 3.1 Create module
 Create new module.
 **Key Points**
 - Make sure path in each module is unique.
-### 3.2.1 Workflow
+### 3.1.1 Workflow
 - Receive draft from request
 - Convert draft to module
 - Save to database
 - Convert saved module to view
 - Return created view
 
-## 3.3 Get Module by id
+## 3.2 Get Module by id
 Get module by id.
-### 3.3.1 Workflow
+### 3.2.1 Workflow
 - Receive id from request
 - Get module from database, and if module not exist, then throw exception
 - Convert module to module view, and return it
 
-## 3.4 Get all modules
+## 3.3 Get all modules
 Get all modules from database.
-### 3.4.1 Workflow
+### 3.3.1 Workflow
 - Fetch all modules from database
 - Convert module list to module view list
 - Return it
 
-## 3.5 Update module
+## 3.4 Update module
 - Receive id, update request form request
 - Get module from database, and if module not exist, then throw exception
 - Check version, if version not correct, then throw exception
@@ -129,11 +149,15 @@ Get all modules from database.
 - Save the updated module to database
 - Convert the saved module to view and return it
 
-## 3.3 Create Scope
+---
+
+# 4 Scope design
+
+## 4.1 Create Scope
 Create new Scope.
 **Key Point**
 - Make sure the modules 
-### 3.3.1 Workflow
+### 4.1.1 Workflow
 - Receive `ScopeDraft` from request
 - Convert permission string list to permission list
 - Convert module string list to module list, if module not found, then throw exception
@@ -141,21 +165,21 @@ Create new Scope.
 - Save the new scope to database
 - Convert scope to scope view and return it
 
-## 3.4 Get scope by id
+## 4.2 Get scope by id
 Get scope by id.
-### 3.4.1 Workflow
+### 4.2.1 Workflow
 - Receive id from request
 - Get scope from database, and if scope not exist, then throw exception
 - Convert scope to scope view, and return it
 
-## 3.5 Get all scopes
+## 4.3 Get all scopes
 Get all scopes from database.
-### 3.5.1 Workflow
+### 4.3.1 Workflow
 - Fetch all scopes from database
 - Convert scope list to scope view list
 - Return it
 
-## 3.6 Update scope
+## 4.4 Update scope
 - Receive id, update request form request
 - Get scope from database, and if scope not exist, then throw exception
 - Check version, if version not correct, then throw exception
@@ -163,32 +187,36 @@ Get all scopes from database.
 - Save the updated scope to database
 - Convert the saved scope to view and return it
 
-## 3.7 Create role
+---
+
+# 5 Role design
+
+## 5.1 Create role
 Create new role.
 **Key Point**
 - Make sure the scope exists. 
-### 3.7.1 Workflow
+### 5.1.1 Workflow
 - Receive `RoleDraft` from request
 - Convert scope string list to scope list
 - Create a new Role, and set the scope, name
 - Save the new role to database
 - Convert role to role view and return it
 
-## 3.8 Get role by id
+## 5.2 Get role by id
 Get role by id.
-### 3.8.1 Workflow
+### 5.2.1 Workflow
 - Receive id from request
 - Get role from database, and if role not exist, then throw exception
 - Convert role to role view, and return it
 
-## 3.9 Get all roles
+## 5.3 Get all roles
 Get all roles from database.
-### 3.9.1 Workflow
+### 5.3.1 Workflow
 - Fetch all roles from database
 - Convert role list to role view list
 - Return it
 
-## 3.10 Update scope
+## 5.4 Update role
 - Receive id, update request form request
 - Get role from database, and if role not exist, then throw exception
 - Check version, if version not correct, then throw exception
@@ -196,24 +224,59 @@ Get all roles from database.
 - Save the updated role to database
 - Convert the saved role to view and return it
 
+---
 
+# 6 Admin design
+## 6.1 Add admin
+Add an admin of the shop to the system.
+**Key Points**
+- Make sure the roles contained exists in the system.
+## 6.1.1 Workflow
+- Receive email, password and role list from request
+- Check if the password is correct and the roles exist in the system
+- Save the new admin to database
+- Return the saved admin
 
+## 6.2 Get admin by id
+Get admin by id.
+### 6.2.1 Workflow
+- Receive id from request
+- Get admin from database, and if admin not exist, then throw exception
+- Convert admin to role view, and return it
 
+## 6.3 Get all admins
+Get all admins from database.
+### 6.3.1 Workflow
+- Fetch all admins from database
+- Convert admin list to admin view list
+- Return it
+
+## 6.4 Update admin
+- Receive id, update request form request
+- Get admin from database, and if admin not exist, then throw exception
+- Check version, if version not correct, then throw exception
+- Run each update service
+- Save the updated admin to database
+- Convert the saved admin to view and return it
+
+---
  
-## 3.2 Login
+# 7 Login design
 Use email and password to login to the admin system, and the server will keep the session.
+## 7.1 Workflow
+- Receive email and password from request 
+- Get admin by email from the database, if not exist then throw not exist exception
+- Check the password, if not match then throw password not correct exception
+- Generate admin session and cache it
+- return login result
 
-## 3.3 Logout
-When logout from the system, the session will be clear immediately.
+# 8 Verify admin status
+Verify admin status with token, and verify if the admin login, and if the admin has the correct permissions.
+## 8.1 Workflow
+- Receive `token`, `resource`, `action` from the request
+- Parse the token, and get adminId, if can not parse the token, then throw exception
+- Check if this token's session correct: existing and not expired
+- Check if the admin has the right permission for the resource and action
+- return the verify result
 
-## 3.4 Check login status and permission
-Check if the user has login, and if he/she has the right permissions.
-
-## 3.5 Change password
-User can change his/her password with his/her old password.
-
-## 3.6 Reset employee's password
-Admin can reset employees's password.
-
-## 3.7 Change employee's permission
-Admin can change employee's permission, and the permissions in session will be changed at the same time.
+# 9 How 
