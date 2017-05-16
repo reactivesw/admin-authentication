@@ -3,6 +3,7 @@ package io.reactivesw.admin.authentication.domain.service;
 import io.reactivesw.admin.authentication.domain.model.Admin;
 import io.reactivesw.admin.authentication.infrastructure.repository.AdminRepository;
 import io.reactivesw.exception.AlreadyExistException;
+import io.reactivesw.exception.NotExistException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +67,9 @@ public class AdminService {
     LOG.debug("Enter. id: {}.", id);
 
     Admin admin = this.adminRepository.findOne(id);
+    if (admin == null) {
+      throw new NotExistException("The admin not exist for id: " + id);
+    }
 
     LOG.debug("Exit. admin: {}.", admin);
 
